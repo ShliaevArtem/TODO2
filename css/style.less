@@ -1,0 +1,296 @@
+
+*{
+  box-sizing: border-box; 
+}
+
+body {
+  background: grey;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: flex-start;
+  max-width: 1000px;
+  min-height: 90vh;
+  margin: 10px auto;
+  padding: 30px;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 6px 6px rgba(255,255,255,.3);
+  &:before {
+    content:'';
+    display: block;
+    width: 100%;
+    height: 60px;
+    order:1;
+  }
+}
+
+.todo-form {
+  & button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__input {
+    margin-top: 25px;
+    width: 400px;
+    height: 40px;
+    border-radius: 5px;
+    padding: 2px 10px;
+  }
+
+  &__error {
+    color: #f00;
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s;
+    &.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(10px);
+    }
+  }
+}
+
+.trash {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 150px;
+  height: 80px;
+  margin-top: 100px;
+  padding: 10px 0;
+  fill: #000;
+  opacity: 0;
+  transition: .2s;
+}
+
+.todo__total, .todo-project__total {
+  position: relative;
+  min-width: 90px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 14px;
+  padding: 8px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: inset 1px 1px 2px 1px rgba(0,0,0,.5);
+  & > p {
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+}
+
+.todo__total {
+  margin-top: 20px;
+  &:before {
+    content: 'TOTAL';
+    position: absolute;
+    font-size: 16px;
+    font-weight: bold;
+    left: 0;
+    top: -20px;
+    width: 100%;
+  }
+}
+
+.todo-project {
+  order: 2;
+  width: 30%; 
+  &__header {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #777;
+    padding: 15px 20px;
+    align-items: center;
+    justify-content: space-between; 
+  }
+
+  &__title {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  &__list {
+    padding-bottom: 70px;
+  }
+
+  &__item {
+    padding: 20px 15px;
+    height: 100px;
+    border-top: 2px solid transparent;
+    font-size: 14px;
+    font-weight: bold;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    word-wrap: break-word;
+    cursor: grab;
+    overflow: hidden;
+    -ms-touch-action: none;
+    -webkit-touch-callout: none;
+    touch-action: none;
+  }
+}
+
+@media only screen and (max-width: 880px) {
+  .todo-project {
+    &__total {
+      margin: 5px auto 0;
+    }
+
+    &__title {
+      width: 100%;
+      text-align:center;
+      font-size: 16px;
+    }
+
+    &__header {
+      padding: 5px;
+    }
+
+    &__total {
+      min-width: 70px;
+      padding: 5px;
+    }
+
+    &__item {
+      padding: 15px;
+    }
+  }
+}
+
+#ac-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1001;
+}
+
+#popup {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+#ac-wrapper { 
+  font: 400 1em/1.5 "Neuton"; 
+  background: #090d00; 
+  color: rgba(255,255,255,.25); 
+  text-align: center; 
+  margin: 0 
+}
+
+.popup_text {
+  font-size: 30px;
+  letter-spacing: .5em;
+  display: inline-block;
+  border: 4px double rgba(255,255,255,.25);
+  position: absolute;
+  top: 18%;
+  left: 50%;
+  margin: 0 0 0 -10em;
+  
+span {
+
+    font: 1000 4em/1 "Oswald", sans-serif;
+    letter-spacing: 0;
+    padding: .25em 0 .325em;
+    display: block;
+    margin: 0 auto;
+    text-shadow: 0 0 80px rgba(255,255,255,.5);
+
+/* Clip Background Image */
+
+    background: url('/images/img2.gif') repeat-y;
+    -webkit-background-clip: text;
+    background-clip: text;
+
+/* Animate Background Image */
+
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: aitf 80s linear infinite;
+
+/* Activate hardware acceleration for smoother animations */
+
+    -webkit-transform: translate3d(0,0,0);
+    -webkit-backface-visibility: hidden;
+
+  }
+}
+
+/* Animate Background Image */
+
+@-webkit-keyframes aitf {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.brk-btn {
+  margin-top: 400px;
+  cursor: pointer;
+  position: relative;
+  background: none;
+  color: black;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 0.2em solid black;
+  padding: 0.5em 1em;
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 10%;
+    background: #222;
+    height: 0.3em;
+    right: 20%;
+    top: -0.21em;
+    transform: skewX(-45deg);
+    -webkit-transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+    transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 10%;
+    background: #222;
+    height: 0.3em;
+    left: 20%;
+    bottom: -0.25em;
+    transform: skewX(45deg);
+    -webkit-transition: all 0.45 cubic-bezier(0.86, 0, 0.07, 1);
+    transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+  &:hover {
+    &::before {
+      right: 80%;
+    }
+    &::after {
+      left: 80%;
+    }
+  }
+}
+
+
+
+
+
+
